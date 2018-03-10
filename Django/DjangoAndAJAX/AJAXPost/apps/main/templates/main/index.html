@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>AJAX Post</title>
+        <meta charset="UTF-8">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'main/css/style.css' %}" media-"screen" title="no title" charset="utf-8">
+        <script src= 'http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+        <script src= "{% static 'main/script.js' %}"></script>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div class='notes-box'>
+            {% if posts %}
+                {% for post in posts %}
+                <div class="post-note">
+                    {{ post.content }}
+                </div>
+                {% endfor %}
+            {% endif %}
+            </div>
+            <div class='form-box'>
+                <form id="myForm" action='post_note' method='POST'>
+                    {% csrf_token %}
+                    <div class="form-item">
+                        <label class="label-item">Message:</label>
+                        <textarea class="input-item" rows="4" cols="50" name='post-area'></textarea>
+                    </div>
+                    <input class="button-1" type='submit' name="formAction" value='Post It!' class="button">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
